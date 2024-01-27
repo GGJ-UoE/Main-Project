@@ -39,7 +39,13 @@ public class CharacterControl : MonoBehaviour
 
             animator.SetTrigger("jump");
             playerVelocity.y += Mathf.Sqrt(jumpForce * -3.0f * gravityValue);
-
+            if (remainingJumps == 0)
+            {
+                if(playerVelocity.y< Mathf.Sqrt(jumpForce * -3.0f * gravityValue))
+                {
+                    playerVelocity.y = Mathf.Sqrt(jumpForce * -3.0f * gravityValue);
+                }
+            }
         }
         
         playerVelocity.y += gravityValue * Time.deltaTime * gravityMultiplier;
