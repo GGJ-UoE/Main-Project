@@ -31,7 +31,7 @@ public class HorizontalMovingEnemy : MonoBehaviour
                 FlipDirection();
             }
         }
-        controller.Move(Vector3.forward * Time.deltaTime * speed);
+        controller.Move(transform.forward * Time.deltaTime * speed);
         //Debug.Log("Will collide: " + WillCollide());
 
     }
