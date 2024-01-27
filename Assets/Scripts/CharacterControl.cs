@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterControl : MonoBehaviour
+public class CharacterControl : MonoBehaviour,IDamageable
 {
     public CharacterController controller;
     public float moveSpeed = 5f;
@@ -52,4 +52,8 @@ public class CharacterControl : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    public void KillImmediately()
+    {
+        Debug.LogError("player died");
+    }
 }
