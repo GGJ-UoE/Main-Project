@@ -26,14 +26,14 @@ public class Enemy : MonoBehaviour
             if (Vector3.Distance(transform.position, desPos) <= 0.1f)
             {
                 currentPos = startpos;
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 90, transform.eulerAngles.z);
 
 
             }
              if (Vector3.Distance(transform.position, startpos) <= 0.1f)
             {
                 currentPos = desPos;
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180, transform.eulerAngles.z);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, -90, transform.eulerAngles.z);
 
             }
             transform.position = Vector3.MoveTowards(transform.position, currentPos, Time.deltaTime * speed);

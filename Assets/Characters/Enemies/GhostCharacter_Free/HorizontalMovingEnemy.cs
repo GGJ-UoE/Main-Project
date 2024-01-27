@@ -32,7 +32,8 @@ public class HorizontalMovingEnemy : MonoBehaviour
             }
         }
         controller.Move(transform.forward * Time.deltaTime * speed);
-        //Debug.Log("Will collide: " + WillCollide());
+        WillCollide();
+        Debug.Log("Will collide: " + WillCollide());
 
     }
 
@@ -47,15 +48,16 @@ public class HorizontalMovingEnemy : MonoBehaviour
         if (floorChecker == null)
             return false;
 
-        Ray ray = new Ray(floorChecker.position + Vector3.up * 0.1f, Vector3.down);
-        float range = 0.2f;
+        Ray ray = new Ray(floorChecker.position, Vector3.down);
+        float range = 1f;
+        //Debug.DrawRay(floorChecker.position, Vector3.down,Color.red);
         return !Physics.Raycast(ray, range);
     }
 
     private bool WillCollide() {
-        Ray ray = new Ray(transform.localPosition + Vector3.forward * 0.1f, Vector3.forward);
-        float range = 2f;
-        Debug.DrawRay(transform.position + Vector3.forward * 0.1f, Vector3.forward, Color.green);
+        Ray ray = new Ray(transform.position + transform.forward * 0.1f, transform.forward);
+        float range = 1f;
+        Debug.DrawRay(transform.position + transform.forward * 0.1f, transform.forward, Color.blue);
         return Physics.Raycast(ray, range);
     }
 

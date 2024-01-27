@@ -10,6 +10,7 @@ public class CharacterControl : MonoBehaviour
     private bool groundedPlayer;
     public float gravityMultiplier = 2f;
     public Animator animator;
+    public Transform body;
     private Vector3 playerVelocity;
     private float gravityValue = -9.81f;
     private int remainingJumps = 2;
@@ -30,7 +31,7 @@ public class CharacterControl : MonoBehaviour
         if (x_raw != 0)
             dir=x_raw;
 
-        animator.transform.rotation = Quaternion.Euler(0, direction * dir, 0);
+        body.rotation = Quaternion.Euler(0, direction * dir, 0);
         animator.SetInteger("run", (int)x_raw);
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && (groundedPlayer || remainingJumps > 0))
@@ -38,6 +39,7 @@ public class CharacterControl : MonoBehaviour
             remainingJumps--;
 
             animator.SetTrigger("jump");
+ 
             playerVelocity.y += Mathf.Sqrt(jumpForce * -3.0f * gravityValue);
             if (remainingJumps == 0)
             {
@@ -47,7 +49,10 @@ public class CharacterControl : MonoBehaviour
                 }
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.Q) && !groundedPlayer)
+        {
+            animator.SetTrigger("attack1");
+        }
         playerVelocity.y += gravityValue * Time.deltaTime * gravityMultiplier;
         controller.Move(playerVelocity * Time.deltaTime);
     }
@@ -56,4 +61,6 @@ public class CharacterControl : MonoBehaviour
     {
         Debug.LogError("player died");
     }
+
+
 }
