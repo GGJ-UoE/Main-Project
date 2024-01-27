@@ -21,7 +21,7 @@ public class Coin_collision : MonoBehaviour
     {
         if (isrunning)
         {
-            this.transform.Translate(0,0.2f,0);
+            this.transform.Translate(0,-0.2f*2,0);
         }
     }
 
@@ -29,14 +29,18 @@ public class Coin_collision : MonoBehaviour
     {
         if(other.gameObject.tag=="Player")
         {
-            gm.Score++;
+            //gm.Score++;
             if(isRunnyCoin)
             {
                 StartCoroutine(RunCoin());
 
             }
             else
-                StartCoroutine(SoundnDestroy());
+            {
+                SoundManager.Instance.playSfx(CoinCollect);
+                Destroy(this.gameObject);
+            }
+
         }
     }
 
@@ -51,7 +55,7 @@ public class Coin_collision : MonoBehaviour
         }
 
         isrunning = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.75f);
         isRunnyCoin= false;
         isrunning= false;
 
@@ -61,12 +65,7 @@ public class Coin_collision : MonoBehaviour
         }
     }
 
-    IEnumerator SoundnDestroy()
-    {
-        Audio.PlayOneShot(CoinCollect);
-        yield return new WaitForSeconds(0.2f);
-        Destroy(this.gameObject);
-    }
+
 
    
 
