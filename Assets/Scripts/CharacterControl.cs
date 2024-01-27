@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterControl : MonoBehaviour,IDamageable
+public class CharacterControl : MonoBehaviour
 {
     public CharacterController controller;
     public float moveSpeed = 5f;

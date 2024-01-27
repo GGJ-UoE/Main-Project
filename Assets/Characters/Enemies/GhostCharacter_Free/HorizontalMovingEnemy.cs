@@ -53,9 +53,10 @@ public class HorizontalMovingEnemy : MonoBehaviour
     }
 
     private bool WillCollide() {
-        Ray ray = new Ray(transform.position + Vector3.forward * 0.1f, Vector3.forward);
-        float range = 0.3f;
-        //Debug.DrawRay(transform.position + Vector3.forward * 0.1f, Vector3.forward, Color.green);
+        Ray ray = new Ray(transform.localPosition + Vector3.forward * 0.1f, Vector3.forward);
+        float range = 2f;
+        Debug.DrawRay(transform.position + Vector3.forward * 0.1f, Vector3.forward, Color.green);
         return Physics.Raycast(ray, range);
     }
+
 }

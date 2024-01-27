@@ -21,7 +21,7 @@ public class Coin_collision : MonoBehaviour
     {
         if (isrunning)
         {
-            this.transform.Translate(0,-0.2f*2,0);
+            this.transform.Translate(0,-0.2f*3,0);
         }
     }
 
@@ -55,7 +55,7 @@ public class Coin_collision : MonoBehaviour
         }
 
         isrunning = true;
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.95f);
         isRunnyCoin= false;
         isrunning= false;
 
