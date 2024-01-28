@@ -48,6 +48,7 @@ public class Playbutton : MonoBehaviour
                 {
                     player.SetActive(true);
                     sm.PlayDelayed(2f,SoundManager.Instance.ahshit);
+                    sm.playMusic(SoundManager.Instance.bgmusic);
                     OnDestroy();
                 }
 
