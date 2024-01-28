@@ -35,6 +35,17 @@ public class CharacterControl : MonoBehaviour
 
         body.rotation = Quaternion.Euler(0, direction * dir, 0);
         animator.SetInteger("run", (int)x_raw);
+
+        if (((x_raw == 1f || x_raw == -1f) && groundedPlayer) && Input.GetKeyDown(KeyCode.Q))
+        {
+            //if ()
+            {
+                Debug.LogError("came");
+                attackType = 2;
+                animator.SetTrigger("slide");
+
+            }
+        }
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && (groundedPlayer || remainingJumps > 0))
         {
@@ -43,6 +54,7 @@ public class CharacterControl : MonoBehaviour
             animator.SetTrigger("jump");
  
             playerVelocity.y += Mathf.Sqrt(jumpForce * -3.0f * gravityValue);
+
             if (remainingJumps == 0)
             {
                 if(playerVelocity.y< Mathf.Sqrt(jumpForce * -3.0f * gravityValue))
@@ -52,21 +64,18 @@ public class CharacterControl : MonoBehaviour
             }
         }
         // jump attack //
-        if (Input.GetKeyDown(KeyCode.Q) && !groundedPlayer && remainingJumps>0)
+        //if (Input.GetKeyDown(KeyCode.Q) && !groundedPlayer && remainingJumps>0)
+        //{
+        //    animator.SetTrigger("attack1");
+        //    attackType = 1;
+        //}
+        // slide attack //
+        // Debug.LogError(controller.velocity.x);
+        if (Input.GetKeyDown(KeyCode.Q) && !groundedPlayer)
         {
+            Debug.LogError("logic 1");
             animator.SetTrigger("attack1");
             attackType = 1;
-        }
-        // slide attack //
-        else if (x >= 0.8f || x <= -0.8f && groundedPlayer && remainingJumps==2)
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                Debug.LogError("came");
-                attackType = 2;
-                animator.SetTrigger("slide");
-
-            }
         }
         playerVelocity.y += gravityValue * Time.deltaTime * gravityMultiplier;
         controller.Move(playerVelocity * Time.deltaTime);
