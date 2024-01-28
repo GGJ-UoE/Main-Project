@@ -7,29 +7,33 @@ public class CollisionController : MonoBehaviour
     // Start is called before the first frame update
     public Animator animator;
     public cameraHandle cameraHandle;
-    public GameObject fallPartilce;
+    public GameObject fallPartilceVFX;
+    public GameObject falonGroundVFX;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag=="trap")
+        if (other.gameObject.tag == "trap")
         {
             cameraHandle.normalCam.Follow = null;
-            Instantiate(fallPartilce,transform.position+new Vector3(0,2,0),fallPartilce.transform.rotation);
+            Instantiate(fallPartilceVFX, transform.position + new Vector3(0, 2, 0), fallPartilceVFX.transform.rotation);
             // fallPartilce.SetActive(false);
-            Invoke("restrt",1.5f);
+            Invoke("restrt", 1.5f);
         }
-        //IDamageable damageable = other.GetComponent<IDamageable>();
-        //if (damageable == null)
-        //{
-        //    damageable = other.GetComponentInParent<IDamageable>();
-        //}
-        //if (damageable != null)
-        //{
-        //    damageable.KillImmediately();
-        //}
+
+
+        if (other.gameObject.tag == "carSpawner")
+        {
+            other.gameObject.SetActive(false);
+            GameManager.instance.carSpawner.SetActive(true);
+        }
     }
 
     void restrt()
     {
         SceneLoader.ReloadCurrentScene();
+    }
+    void jumpAttack()
+    {
+        Instantiate(falonGroundVFX, new Vector3(transform.position.x,1.03f,transform.position.z) , falonGroundVFX.transform.rotation);
+        
     }
 }

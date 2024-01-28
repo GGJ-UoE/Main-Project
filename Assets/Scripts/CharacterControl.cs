@@ -16,6 +16,7 @@ public class CharacterControl : MonoBehaviour
     private int remainingJumps = 2;
     private float direction=90;
     float dir=1;
+    public static int attackType;
     private void Update()
     {
         groundedPlayer = controller.isGrounded;
@@ -26,6 +27,7 @@ public class CharacterControl : MonoBehaviour
         }
         float x = Input.GetAxis("Horizontal");
         float x_raw = Input.GetAxisRaw("Horizontal");
+
         Vector3 move = new Vector3(x, 0, 0);
         controller.Move(move * Time.deltaTime * moveSpeed);
         if (x_raw != 0)
@@ -49,9 +51,22 @@ public class CharacterControl : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.Q) && !groundedPlayer)
+        // jump attack //
+        if (Input.GetKeyDown(KeyCode.Q) && !groundedPlayer && remainingJumps>0)
         {
             animator.SetTrigger("attack1");
+            attackType = 1;
+        }
+        // slide attack //
+        else if (x >= 0.8f || x <= -0.8f && groundedPlayer && remainingJumps==2)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Debug.LogError("came");
+                attackType = 2;
+                animator.SetTrigger("slide");
+
+            }
         }
         playerVelocity.y += gravityValue * Time.deltaTime * gravityMultiplier;
         controller.Move(playerVelocity * Time.deltaTime);
@@ -61,6 +76,11 @@ public class CharacterControl : MonoBehaviour
     {
         Debug.LogError("player died");
     }
-
+    public void die()
+    {
+        animator.SetTrigger("die");
+        controller.enabled = false;
+        Destroy(gameObject, 3f);
+    }
 
 }

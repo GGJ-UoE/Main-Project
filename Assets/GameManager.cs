@@ -5,16 +5,19 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int Score;
-    // Start is called before the first frame update
+    public GameObject carSpawner;
+    public static GameManager instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
     void Start()
     {
         Score= 0;
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
