@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : SingeltonBase<SoundManager>
 {
     public AudioSource sfxAudio, musicAudio;
-    public AudioClip die, win, pickupCoin,no1,no2,no3,ahshit;
+    public AudioClip die, win, pickupCoin,no1,no2,no3,ahshit,bgmusic;
     public void playSfx(AudioClip clip)
     {
         if (sfxAudio != null && clip!=null)
@@ -29,6 +29,7 @@ public class SoundManager : SingeltonBase<SoundManager>
     {
         if (musicAudio != null && clip!=null)
         {
+            musicAudio.volume=0.3f;
             musicAudio.clip = clip;
             musicAudio.Play();
         }
