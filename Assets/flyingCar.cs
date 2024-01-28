@@ -10,6 +10,7 @@ public class flyingCar : MonoBehaviour
     private void Start()
     {
         speed = Random.Range(7, 10);
+        StartCoroutine(dei());
     }
     void Update()
     {
@@ -19,6 +20,8 @@ public class flyingCar : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            GameManager.isOver = true;
+            GameManager.instance.gameOver(deathEffectType.stars);
             other.gameObject.GetComponent<CharacterControl>().die();
 
         }
@@ -27,5 +30,10 @@ public class flyingCar : MonoBehaviour
             carspawner.spawnCount--;
             Destroy(gameObject);
         }
+    }
+    IEnumerator dei()
+    {
+        yield return new WaitForSeconds(6);
+        Destroy(this.gameObject);
     }
 }

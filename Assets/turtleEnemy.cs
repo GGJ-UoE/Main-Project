@@ -19,6 +19,7 @@ public class turtleEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.isOver) return;
         if (Vector3.Distance(transform.position,player.transform.position)<=15f)
         {
             anim.SetInteger("state", 1);
@@ -53,9 +54,18 @@ public class turtleEnemy : MonoBehaviour
             else if (CharacterControl.attackType == 0)
             {
                 // player will die //
+                GameManager.isOver=true;
+                GameManager.instance.gameOver(deathEffectType.stars);
                 other.gameObject.GetComponent<CharacterControl>().die();
             }
             CharacterControl.attackType = 0;
         }
+        Invoke(nameof(resetatk), 1f);
     }
+
+    void resetatk()
+    {
+        CharacterControl.attackType = 0;
+    }
+
 }

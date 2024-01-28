@@ -14,9 +14,10 @@ public class CharacterControl : MonoBehaviour
     private Vector3 playerVelocity;
     private float gravityValue = -9.81f;
     private int remainingJumps = 2;
-    private float direction=90;
-    float dir=1;
+    private float direction = 90;
+    float dir = 1;
     public static int attackType;
+    public SoundManager sm;
     private void Update()
     {
         groundedPlayer = controller.isGrounded;
@@ -31,7 +32,7 @@ public class CharacterControl : MonoBehaviour
         Vector3 move = new Vector3(x, 0, 0);
         controller.Move(move * Time.deltaTime * moveSpeed);
         if (x_raw != 0)
-            dir=x_raw;
+            dir = x_raw;
 
         body.rotation = Quaternion.Euler(0, direction * dir, 0);
         animator.SetInteger("run", (int)x_raw);
@@ -52,12 +53,12 @@ public class CharacterControl : MonoBehaviour
             remainingJumps--;
 
             animator.SetTrigger("jump");
- 
+
             playerVelocity.y += Mathf.Sqrt(jumpForce * -3.0f * gravityValue);
 
             if (remainingJumps == 0)
             {
-                if(playerVelocity.y< Mathf.Sqrt(jumpForce * -3.0f * gravityValue))
+                if (playerVelocity.y < Mathf.Sqrt(jumpForce * -3.0f * gravityValue))
                 {
                     playerVelocity.y = Mathf.Sqrt(jumpForce * -3.0f * gravityValue);
                 }
@@ -87,6 +88,7 @@ public class CharacterControl : MonoBehaviour
     }
     public void die()
     {
+        sm.playSfx(SoundManager.Instance.dead);
         animator.SetTrigger("die");
         controller.enabled = false;
         Destroy(gameObject, 3f);

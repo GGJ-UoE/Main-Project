@@ -4,14 +4,19 @@ using UnityEngine;
 using Cinemachine;
 public class cameraHandle : MonoBehaviour
 {
-    public CinemachineVirtualCamera normalCam, zoomedCam, startCam;
+    public CinemachineVirtualCamera normalCam, zoomedCam, startCam,finishCam;
+
     void Start()
     {
-        startCam.Priority=0; 
-        normalCam.Priority=10; 
-        zoomedCam.Priority=0; 
+        
     }
 
+    public void enableCamera()
+    {
+        startCam.Priority = 0;
+        normalCam.Priority = 10;
+        zoomedCam.Priority = 0;
+    }
 
     public void switchToZoom(bool flag)
     {
@@ -25,5 +30,13 @@ public class cameraHandle : MonoBehaviour
             normalCam.Priority = 10;
             zoomedCam.Priority = 0;
         }
+    }
+    public void Onfinish()
+    {
+        startCam.Priority = 0;
+        normalCam.Priority = 0;
+        zoomedCam.Priority = 0;
+        finishCam.Priority = 10;
+
     }
 }

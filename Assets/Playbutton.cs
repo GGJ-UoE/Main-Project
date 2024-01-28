@@ -9,6 +9,8 @@ public class Playbutton : MonoBehaviour
     public bool ismoving;
     public Vector3 newpos;
     private SoundManager sm;
+    public cameraHandle camhandle;
+    private bool gotPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,51 +18,62 @@ public class Playbutton : MonoBehaviour
         sm=SoundManager.Instance;
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!gotPos)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            //newpos = new Vector3(Random.Range(-250, -220), Random.Range(50, 60), 2.3f);
             if (Physics.Raycast(ray, out hit, 100))
             {
+                if (hit.collider.tag == "Playbutton")
 
-                if (hit.collider.tag=="Playbutton"&&touchcounts<3)
+                   newpos = new Vector3(Random.Range(-250, -210), Random.Range(70, 40), 0);
+                gotPos = true;
+
+            }
+
+
+
+        }
+
+
+        if (gotPos)
+        {
+            if (touchcounts < 3)
+            {
+                sm.playSfx(SoundManager.Instance.no1);
+                this.transform.position = Vector3.MoveTowards(this.transform.position, newpos, 2);
+                if (Vector3.Distance(this.transform.position, newpos) <= 1)
                 {
-                    if(touchcounts==0)
-                    {
-                        sm.playSfx(SoundManager.Instance.no1);
-                    }
-                    else if(touchcounts==1)
-                    {
-                        sm.playSfx(SoundManager.Instance.no2);
-                    }
-                    else if(touchcounts==2)
-                    {
-                        sm.playSfx(SoundManager.Instance.no3);
-                    }
-                    newpos = new Vector3(Random.Range(-250, -220), Random.Range(50, 60),2.3f);
-                    this.transform.position = Vector3.Lerp(this.transform.position, newpos, 2.3f);
+
                     touchcounts++;
+                    gotPos = false;
                 }
-                if(touchcounts==3)
+
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
                 {
                     player.SetActive(true);
-                    sm.PlayDelayed(2f,SoundManager.Instance.ahshit);
-                    sm.playMusic(SoundManager.Instance.bgmusic);
-                    OnDestroy();
+                    camhandle.enableCamera();
+                    sm.PlayDelayed(2f, SoundManager.Instance.ahshit);
+                    Destroy(gameObject);
+                    
                 }
-
-            
             }
         }
-      
+
     }
+    
 
     public void OnDestroy()
     {
-        Destroy(this.gameObject);
     }
 
 }

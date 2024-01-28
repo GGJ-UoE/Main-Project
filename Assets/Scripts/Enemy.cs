@@ -79,6 +79,8 @@ public class Enemy : MonoBehaviour
             else if (CharacterControl.attackType == 0)
             {
                 // player will die //
+                GameManager.isOver = true;
+                GameManager.instance.gameOver(deathEffectType.stars);
                 other.gameObject.GetComponent<CharacterControl>().die();
             }
             CharacterControl.attackType = 0;

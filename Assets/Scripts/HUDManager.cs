@@ -37,6 +37,7 @@ public class HUDManager : SingeltonBase<HUDManager>
         remainingTime = startingTime;
         coins = 0;
         coinsText.text = "" + coins;
+        ShowTopPanel(false);
     }
 
     public void InitHUDManager(float customTime, int customCoins)
