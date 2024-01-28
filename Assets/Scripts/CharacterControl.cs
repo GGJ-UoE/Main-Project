@@ -36,7 +36,7 @@ public class CharacterControl : MonoBehaviour
         body.rotation = Quaternion.Euler(0, direction * dir, 0);
         animator.SetInteger("run", (int)x_raw);
 
-        if (((x_raw == 1f || x_raw == -1f) && groundedPlayer) && Input.GetKeyDown(KeyCode.Q))
+        if ((x_raw == 1f || x_raw == -1f) && groundedPlayer && Input.GetKeyDown(KeyCode.Q))
         {
             //if ()
             {

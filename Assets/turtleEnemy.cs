@@ -13,7 +13,7 @@ public class turtleEnemy : MonoBehaviour
     private CharacterControl player;
     void Start()
     {
-        player = FindObjectOfType<CharacterControl>();
+        player = FindObjectOfType<CharacterControl>(true);
     }
 
     // Update is called once per frame
@@ -39,7 +39,6 @@ public class turtleEnemy : MonoBehaviour
             // explode enemy //
             if (CharacterControl.attackType == 1)
             {
-                // player gonna fucked
                 //Instantiate(deathPartilce, transform.position, deathPartilce.transform.rotation);
                 //Destroy(gameObject);
             }

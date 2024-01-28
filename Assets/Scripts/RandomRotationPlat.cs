@@ -7,6 +7,7 @@ public class RandomRotationPlat : MonoBehaviour
     public float suddenSpinDuration;
     public float torqueAmount;
     public float torqueVariance;
+    public float angleLimit;
 
     private Rigidbody rb;
     private float rotateDirection;
@@ -28,6 +29,14 @@ public class RandomRotationPlat : MonoBehaviour
         {
             StartCoroutine(ApplySuddenTorque(rotateDirection));
         }
+        Vector3 localEulerAngles = transform.localEulerAngles;
+        float zRotation = localEulerAngles.z;
+        if (zRotation > 180)
+        {
+            zRotation -= 360;
+        }
+        zRotation = Mathf.Clamp(zRotation, -angleLimit, angleLimit);
+        transform.localEulerAngles = new Vector3(localEulerAngles.x, localEulerAngles.y, zRotation);
     }
 
     IEnumerator ApplySuddenTorque(float direction)
