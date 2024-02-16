@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class pianoss : MonoBehaviour
 {
-    public AudioSource audio;
-    public AudioClip goat1;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public SoundManager sm;
 
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag=="Player")
         {
-            audio.PlayOneShot(goat1);
+            if (this.gameObject.tag == "Goat1")
+            {
+                
+                sm.playSfx(sm.Goat, 0.9f,1);
+            }
+            if (this.gameObject.tag == "Goat2")
+            {
+                
+                sm.playSfx(sm.Goat, 1.05f,1);
+            }
+            if (this.gameObject.tag == "Goat3")
+            {
+                
+                sm.playSfx(sm.Goat, 1.2f, 1);
+            }
+            if (this.gameObject.tag == "Goat4")
+            {
+                
+                sm.playSfx(sm.Goat, 0.7f,1);
+            }
+          
         }
     }
 }

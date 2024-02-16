@@ -7,8 +7,8 @@ public class Coin_collision : MonoBehaviour
     public GameManager gm;
     public bool isRunnyCoin;
     private bool isrunning=false;
-    public AudioSource Audio;
-    public AudioClip CoinCollect, RunnySfx;
+    public SoundManager sm;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +37,7 @@ public class Coin_collision : MonoBehaviour
             }
             else
             {
-                SoundManager.Instance.playSfx(CoinCollect);
+                sm.playSfx(sm.Coin_collect, 1, 1);
                 Destroy(this.gameObject);
             }
 
@@ -49,7 +49,7 @@ public class Coin_collision : MonoBehaviour
         Rotation rot = GetComponent<Rotation>();
         if (rot != null)
         {
-            Audio.PlayOneShot(RunnySfx);
+            sm.playSfx(sm.Coin_Run, 1, 1);
             transform.eulerAngles = new Vector3(0, 0, 90);
             rot.enabled = false;
         }

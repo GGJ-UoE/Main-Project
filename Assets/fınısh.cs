@@ -37,7 +37,7 @@ public class finish : MonoBehaviour
             }
             else
             {
-                SoundManager.Instance.playSfx(CoinCollect);
+                SoundManager.Instance.playSfx(CoinCollect, 1,1);
                 GameManager.instance.win();
                 //Destroy(this.gameObject);
             }

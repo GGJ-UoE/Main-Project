@@ -46,7 +46,7 @@ public class Playbutton : MonoBehaviour
         {
             if (touchcounts < 3)
             {
-                sm.playSfx(SoundManager.Instance.no1);
+                sm.playSfx(SoundManager.Instance.no1,1,1);
                 this.transform.position = Vector3.MoveTowards(this.transform.position, newpos, 2);
                 if (Vector3.Distance(this.transform.position, newpos) <= 1)
                 {
@@ -62,7 +62,7 @@ public class Playbutton : MonoBehaviour
                 {
                     player.SetActive(true);
                     camhandle.enableCamera();
-                    sm.PlayDelayed(2f, SoundManager.Instance.ahshit);
+                    sm.PlayDelayed(2f, SoundManager.Instance.ahshit,1,1);
                     Destroy(gameObject);
                     
                 }

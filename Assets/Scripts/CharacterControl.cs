@@ -88,7 +88,7 @@ public class CharacterControl : MonoBehaviour
     }
     public void die()
     {
-        sm.playSfx(SoundManager.Instance.dead);
+        sm.playSfx(SoundManager.Instance.dead,1, 0.3f);
         animator.SetTrigger("die");
         controller.enabled = false;
         Destroy(gameObject, 3f);
